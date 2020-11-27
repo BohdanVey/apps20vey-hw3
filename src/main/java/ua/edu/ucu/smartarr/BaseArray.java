@@ -2,11 +2,12 @@ package ua.edu.ucu.smartarr;
 
 // Base array for decorators
 public class BaseArray implements SmartArray {
-    protected Object[] baseArray;
+    private Object[] baseArray;
 
-    public BaseArray(Object[] baseArray){
-        this.baseArray = baseArray.clone(); // Ми копіюємо щоб не змінювати заданий нам масив
+    public BaseArray(Object[] baseArray) {
+        this.baseArray = baseArray.clone();
     }
+
     @Override
     public Object[] toArray() {
         return baseArray.clone();
@@ -20,5 +21,13 @@ public class BaseArray implements SmartArray {
     @Override
     public int size() {
         return baseArray.length;
+    }
+
+    public Object[] getBaseArray() {
+        return baseArray;
+    }
+
+    public void setBaseArray(Object[] arr) {
+        baseArray = arr.clone();
     }
 }
