@@ -70,12 +70,8 @@ public class SmartArrayApp {
 
             @Override
             public boolean test(Object t) {
-                if (t instanceof Student) {
                     return (((Student) t).getGPA() >= GPA_BIGGER
                             && ((Student) t).getYear() == YEAR_EQUAL);
-                }
-                throw new IllegalArgumentException(
-                        "This filter used only for Students");
             }
         };
         SmartArray studentSmartArraySort =
@@ -84,13 +80,8 @@ public class SmartArrayApp {
 
             @Override
             public int compare(Object studentOne, Object studentTwo) {
-                if (studentOne instanceof Student
-                        && studentTwo instanceof Student) {
                     return ((Student) studentOne).getSurname().
                             compareTo(((Student) studentTwo).getSurname());
-                }
-                throw new IllegalArgumentException(
-                        "This comparator used only for Students");
             }
         };
         SmartArray studentSmartArraySorted =
@@ -102,12 +93,8 @@ public class SmartArrayApp {
         MyFunction transformString = new MyFunction() {
             @Override
             public Object apply(Object t) {
-                if (t instanceof Student) {
                     return ((Student) t).getSurname()
                             + ' ' + ((Student) t).getName();
-                }
-                throw new IllegalArgumentException(
-                        "This transformation used only for Students");
             }
         };
         SmartArray studentsStringSmartArray
