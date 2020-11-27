@@ -5,7 +5,13 @@ import java.util.Arrays;
 import ua.edu.ucu.functions.MyComparator;
 import ua.edu.ucu.functions.MyFunction;
 import ua.edu.ucu.functions.MyPredicate;
-import ua.edu.ucu.smartarr.*;
+import ua.edu.ucu.smartarr.SmartArray;
+import ua.edu.ucu.smartarr.BaseArray;
+import ua.edu.ucu.smartarr.DistinctDecorator;
+import ua.edu.ucu.smartarr.FilterDecorator;
+import ua.edu.ucu.smartarr.MapDecorator;
+import ua.edu.ucu.smartarr.SortDecorator;
+
 
 public class SmartArrayApp {
 
@@ -57,7 +63,7 @@ public class SmartArrayApp {
         //Object[] result = studentSmartArray.toArray();
         //return Arrays.copyOf(result, result.length, String[].class);
         SmartArray studentSmartArray = new BaseArray(students);
-        MyPredicate gt4GPAAnd2ndYear = new MyPredicate() {
+        MyPredicate sortMethod = new MyPredicate() {
 
             @Override
             public boolean test(Object t) {
@@ -65,22 +71,26 @@ public class SmartArrayApp {
                     return (((Student) t).getGPA() >= 4
                             && ((Student) t).getYear() == 2);
                 }
-                throw new IllegalArgumentException("This filter used only for Students");
+                throw new IllegalArgumentException(
+                        "This filter used only for Students");
             }
         };
-        SmartArray studentSmartArray2ndYearGPAgt4 =
-                new FilterDecorator(studentSmartArray, gt4GPAAnd2ndYear);
+        SmartArray studentSmartArraySort =
+                new FilterDecorator(studentSmartArray, sortMethod);
         MyComparator comparatorBySurname = new MyComparator() {
 
             @Override
-            public int compare(Object o1, Object o2) {
-                if (o1 instanceof Student && o2 instanceof Student)
-                    return ((Student) o1).getSurname().compareTo(((Student) o2).getSurname());
-                throw new IllegalArgumentException("This comparator used only for Students");
+            public int compare(Object studentOne, Object studentTwo) {
+                if (studentOne instanceof Student
+                        && studentTwo instanceof Student)
+                    return ((Student) studentOne).getSurname().
+                            compareTo(((Student) studentTwo).getSurname());
+                throw new IllegalArgumentException(
+                        "This comparator used only for Students");
             }
         };
         SmartArray studentSmartArraySorted =
-                new SortDecorator(studentSmartArray2ndYearGPAgt4, comparatorBySurname);
+                new SortDecorator(studentSmartArraySort, comparatorBySurname);
 
         SmartArray studentSmartArrayDistinct =
                 new DistinctDecorator(studentSmartArraySorted); // remove same names
@@ -89,12 +99,14 @@ public class SmartArrayApp {
             @Override
             public Object apply(Object t) {
                 if (t instanceof Student)
-                    return ((Student) t).getSurname() + ' ' + ((Student) t).getName();
-                throw new IllegalArgumentException("This transformation used only for Students");
+                    return ((Student) t).getSurname()
+                            + ' ' + ((Student) t).getName();
+                throw new IllegalArgumentException(
+                        "This transformation used only for Students");
             }
         };
         SmartArray studentsStringSmartArray
-                = new MapDecorator(studentSmartArrayDistinct,transformToString);
+                = new MapDecorator(studentSmartArrayDistinct, transformToString);
         Object[] result = studentsStringSmartArray.toArray();
         return Arrays.copyOf(result, result.length, String[].class);
     }
