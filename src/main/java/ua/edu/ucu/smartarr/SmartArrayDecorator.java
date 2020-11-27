@@ -1,8 +1,8 @@
 package ua.edu.ucu.smartarr;
 
 abstract class SmartArrayDecorator implements SmartArray {
-    protected Object[] decoratedArray;
-    protected SmartArray smartArray;
+    private Object[] decoratedArray;
+    private SmartArray smartArray;
 
     public SmartArrayDecorator(SmartArray smartArray) {
         this.smartArray = smartArray;
@@ -18,5 +18,12 @@ abstract class SmartArrayDecorator implements SmartArray {
     @Override
     public int size() {
         return decoratedArray.length;
+    }
+
+    public void setDecoratedArray(Object[] decoratedArray) {
+        this.decoratedArray = decoratedArray;
+    }
+    public Object[] getDecoratedArray(){
+        return decoratedArray;
     }
 }

@@ -8,8 +8,8 @@ import java.util.Arrays;
 public class FilterDecorator extends SmartArrayDecorator {
     public FilterDecorator(SmartArray smartArray, MyPredicate pred) {
         super(smartArray);
-        this.decoratedArray =
-                Arrays.stream(smartArray.toArray()).filter(pred::test).toArray();
+        this.setDecoratedArray(
+                Arrays.stream(smartArray.toArray()).filter(pred::test).toArray());
 
     }
 

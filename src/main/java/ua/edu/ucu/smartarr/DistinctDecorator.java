@@ -20,7 +20,7 @@ public class DistinctDecorator extends SmartArrayDecorator {
             }
         }
 
-        this.decoratedArray = copiedArr.toArray();
+        this.setDecoratedArray(copiedArr.toArray());
     }
 
     @Override
