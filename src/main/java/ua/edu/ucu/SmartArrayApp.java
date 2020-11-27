@@ -62,12 +62,14 @@ public class SmartArrayApp {
             @Override
             public boolean test(Object t) {
                 if (t instanceof Student) {
-                    return (((Student) t).getGPA() >= 4 && ((Student) t).getYear() == 2);
+                    return (((Student) t).getGPA() >= 4
+                            && ((Student) t).getYear() == 2);
                 }
                 throw new IllegalArgumentException("This filter used only for Students");
             }
         };
-        SmartArray studentSmartArray2ndYearGPAgt4 = new FilterDecorator(studentSmartArray, gt4GPAAnd2ndYear); // remove not 2 years and gpa less 4
+        SmartArray studentSmartArray2ndYearGPAgt4 =
+                new FilterDecorator(studentSmartArray, gt4GPAAnd2ndYear);
         MyComparator comparatorBySurname = new MyComparator() {
 
             @Override
@@ -77,9 +79,11 @@ public class SmartArrayApp {
                 throw new IllegalArgumentException("This comparator used only for Students");
             }
         };
-        SmartArray studentSmartArraySorted = new SortDecorator(studentSmartArray2ndYearGPAgt4, comparatorBySurname);
+        SmartArray studentSmartArraySorted =
+                new SortDecorator(studentSmartArray2ndYearGPAgt4, comparatorBySurname);
 
-        SmartArray studentSmartArrayDistinct = new DistinctDecorator(studentSmartArraySorted); // remove same names
+        SmartArray studentSmartArrayDistinct =
+                new DistinctDecorator(studentSmartArraySorted); // remove same names
 
         MyFunction transformToString = new MyFunction() {
             @Override
@@ -89,7 +93,8 @@ public class SmartArrayApp {
                 throw new IllegalArgumentException("This transformation used only for Students");
             }
         };
-        SmartArray studentsStringSmartArray = new MapDecorator(studentSmartArrayDistinct,transformToString);
+        SmartArray studentsStringSmartArray
+                = new MapDecorator(studentSmartArrayDistinct,transformToString);
         Object[] result = studentsStringSmartArray.toArray();
         return Arrays.copyOf(result, result.length, String[].class);
     }
