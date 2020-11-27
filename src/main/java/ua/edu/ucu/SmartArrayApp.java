@@ -65,11 +65,14 @@ public class SmartArrayApp {
         SmartArray studentSmartArray = new BaseArray(students);
         MyPredicate sortMethod = new MyPredicate() {
 
+            private static final int YEAR_EQUAL = 2;
+            private static final double GPA_BIGGER = 4;
+
             @Override
             public boolean test(Object t) {
                 if (t instanceof Student) {
-                    return (((Student) t).getGPA() >= 4
-                            && ((Student) t).getYear() == 2);
+                    return (((Student) t).getGPA() >= GPA_BIGGER
+                            && ((Student) t).getYear() == YEAR_EQUAL);
                 }
                 throw new IllegalArgumentException(
                         "This filter used only for Students");
@@ -82,9 +85,10 @@ public class SmartArrayApp {
             @Override
             public int compare(Object studentOne, Object studentTwo) {
                 if (studentOne instanceof Student
-                        && studentTwo instanceof Student)
+                        && studentTwo instanceof Student) {
                     return ((Student) studentOne).getSurname().
                             compareTo(((Student) studentTwo).getSurname());
+                }
                 throw new IllegalArgumentException(
                         "This comparator used only for Students");
             }
@@ -98,9 +102,10 @@ public class SmartArrayApp {
         MyFunction transformToString = new MyFunction() {
             @Override
             public Object apply(Object t) {
-                if (t instanceof Student)
+                if (t instanceof Student) {
                     return ((Student) t).getSurname()
                             + ' ' + ((Student) t).getName();
+                }
                 throw new IllegalArgumentException(
                         "This transformation used only for Students");
             }
