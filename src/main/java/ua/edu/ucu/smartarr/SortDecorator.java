@@ -9,8 +9,8 @@ public class SortDecorator extends SmartArrayDecorator {
 
     public SortDecorator(SmartArray smartArray, MyComparator cmp) {
         super(smartArray);
-        this.setDecoratedArray(Arrays.stream
-                (smartArray.toArray()).sorted(cmp).toArray());
+        this.setDecoratedArray(Arrays.stream(
+                smartArray.toArray()).sorted(cmp).toArray());
     }
 
     @Override

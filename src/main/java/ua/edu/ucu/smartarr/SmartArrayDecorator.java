@@ -20,8 +20,8 @@ abstract class SmartArrayDecorator implements SmartArray {
         return decoratedArray.length;
     }
 
-    public void setDecoratedArray(Object[] decoratedArray) {
-        this.decoratedArray = decoratedArray;
+    public void setDecoratedArray(Object[] decoratedArraySet) {
+        this.decoratedArray = decoratedArraySet;
     }
     public Object[] getDecoratedArray(){
         return decoratedArray;
