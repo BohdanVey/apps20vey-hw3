@@ -97,9 +97,9 @@ public class SmartArrayApp {
                 new SortDecorator(studentSmartArraySort, comparatorBySurname);
 
         SmartArray studentSmartArrayDistinct =
-                new DistinctDecorator(studentSmartArraySorted); // remove same names
+                new DistinctDecorator(studentSmartArraySorted);
 
-        MyFunction transformToString = new MyFunction() {
+        MyFunction transformString = new MyFunction() {
             @Override
             public Object apply(Object t) {
                 if (t instanceof Student) {
@@ -111,7 +111,7 @@ public class SmartArrayApp {
             }
         };
         SmartArray studentsStringSmartArray
-                = new MapDecorator(studentSmartArrayDistinct, transformToString);
+                = new MapDecorator(studentSmartArrayDistinct, transformString);
         Object[] result = studentsStringSmartArray.toArray();
         return Arrays.copyOf(result, result.length, String[].class);
     }
